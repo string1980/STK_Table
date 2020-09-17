@@ -3,10 +3,12 @@ import { NgModule, Injector } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 
 import { StkTableSpfxWebPartComponent } from './stk-table-spfx-web-part/stk-table-spfx-web-part.component';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
-    StkTableSpfxWebPartComponent
+    StkTableSpfxWebPartComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule
