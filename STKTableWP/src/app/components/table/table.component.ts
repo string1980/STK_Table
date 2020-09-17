@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {CurrentUserModel} from '../../models/current-user.model';
 import {IRow} from '../../models/table';
-import {Observable} from 'rxjs';
+import {SharepointService} from '../../services/sharepoint.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {SelectionModel} from '@angular/cdk/collections';
+import {YesNoComponent} from '../../dialogs/yes-no/yes-no.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
-  selector: 'yl-table',
+  selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent implements OnInit {
   currentUser: CurrentUserModel;
@@ -25,7 +30,9 @@ export class TableComponent implements OnInit {
   rowChecked: boolean;
   version: IRow;
   versionStatus: IRow;
-  constructor() { }
+
+  constructor(private spService: SharepointService, private cdr: ChangeDetectorRef,  public dialog: MatDialog) {
+  }
 
   ngOnInit() {
 
@@ -80,6 +87,36 @@ export class TableComponent implements OnInit {
     this.versionStatus = this.rowsFromServer.find(row => row.Status === 'Edit Mode');
   }
 
+  onCheck(row: IRow, event, index: number) {
+    this.selectedRowIndex = this.rowsFromServer.indexOf(row);
+    this.isSelected = this.selectedRowIndex === index;
+    console.log('selected row index', this.isSelected);
+    if (event.target.checked) {
+      this.rowChecked = true;
+      row.checked = event.target.checked;
+      this.selectedRows.push(row);
+    } else {
+      this.rowChecked = false;
+      this.selectedRows.splice(this.selectedRows.indexOf(row), 1);
+    }
+    this.cdr.detectChanges();
+    console.log('Selected rows', this.selectedRows);
+  }
+
+
+  onSubmitTemplateBased(tableForm) {
+    // console.log('Table form', tableForm);
+  }
+
+  openYesNoDialog() {
+    const dialogRef = this.dialog.open(YesNoComponent);
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        //  TODO: redirect to another page
+      }
+    });
+    this.cdr.detectChanges();
+  }
 
 
 }
