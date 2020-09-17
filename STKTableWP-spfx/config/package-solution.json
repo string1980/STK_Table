@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "stk-table-wp-spfx-client-side-solution",
+    "id": "1e613862-1b2f-48a5-a0ac-ab9788e9f9ac",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true
+  },
+  "paths": {
+    "zippedPackage": "solution/stk-table-wp-spfx.sppkg"
+  }
+}

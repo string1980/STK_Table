@@ -1,0 +1,23 @@
+{
+  "@pnp/generator-spfx": {
+    "framework": "none",
+    "pnpFramework": "angularelements",
+    "pnp-libraries": [
+      "@pnp/pnpjs",
+      "@pnp/spfx-property-controls",
+      "spfx-uifabric-themes"
+    ],
+    "pnp-ci": "no-devops",
+    "pnp-vetting": [
+      "webpack-analyzer"
+    ],
+    "spfxenv": "onprem19"
+  },
+  "@microsoft/generator-sharepoint": {
+    "solutionName": "STKTableWP-spfx",
+    "environment": "onprem19",
+    "framework": "none",
+    "isCreatingSolution": true,
+    "whichFolder": "subdir"
+  }
+}
